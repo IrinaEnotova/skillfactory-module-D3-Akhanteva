@@ -1,0 +1,26 @@
+{% extends 'flatpages/default.html' %}
+
+{% load myFilters %}
+
+{% block myTitle %}
+  НОВОСТИ
+{% endblock myTitle %}
+
+{% block myContent %}
+  <h1>Все новости</h1>
+  <p>Количество новостей: {{ news|length }}</p>
+
+  {% if news %}
+    <!-- {{ news }} -->
+    {% for post in news %}
+      <hr>
+      <h3>{{ post.title|Censor:'Вонючка' }}</h3>
+      <p>{{ post.dateCreation|date:'d.m.Y' }}</p>
+      <hr>
+      <p>{{post.text|truncatechars:50|Censor:'Вонючка'}}</p>
+    {% endfor %}
+
+  {% else %}
+    <h2>Новостей нет :(</h2>
+  {% endif %}
+{% endblock myContent %}
